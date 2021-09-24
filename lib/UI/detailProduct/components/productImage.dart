@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Service/apiStatic.dart';
 
 import '../../../constants.dart';
 
@@ -28,8 +29,8 @@ class ProductImage extends StatelessWidget {
             ),
           ),
           Transform.rotate(angle: -180 / 360,
-            child: Image.asset(
-              gambar,
+            child: Image.network(
+              ApiStatic.host+gambar,
               height: size.width * 0.8,
               width: size.width * 0.8,
               fit: BoxFit.cover,

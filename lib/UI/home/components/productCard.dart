@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Models/Product/product.dart';
+import 'package:flutter_application_1/Service/apiStatic.dart';
 
 import '../../../constants.dart';
 
@@ -42,8 +43,8 @@ class ProductCard extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: kDefaulPadding),
                   height: 140,
                   width: 200,
-                  child: Image.asset(
-                    product.gambar,
+                  child: Image.network(
+                    ApiStatic.host+product.gambar,
                     fit: BoxFit.cover,
                     ),
                 ),

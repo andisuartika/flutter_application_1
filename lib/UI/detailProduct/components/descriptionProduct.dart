@@ -28,7 +28,7 @@ class DescriptionProduct extends StatelessWidget {
             ),
           ),
           Text(
-            product.brand,
+            product.kategori,
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.w300

@@ -1,42 +1,67 @@
-class Product{
-  final int id, harga;
-  final String nama, brand, deskripsi, gambar;
+// class Product{
+//   final int id, harga;
+//   final String nama, kategori, deskripsi, gambar;
 
-  Product({this.id, this.harga,  this.nama, this.brand, this.deskripsi, this.gambar});
+//   Product({this.id, this.harga,  this.nama, this.kategori, this.deskripsi, this.gambar});
 
-  factory Product.fromJson(Map<String, dynamic> json) =>Product(
-    id: json['id'],
-    harga: json['id'],
-    nama: json['nama'].toString(),
-    brand: json['brand'].toString(),
-    deskripsi: json['deskripsi'].toString(),
-    gambar: json['gambar'].toString(),
-  );
+//   factory Product.fromJson(Map<String, dynamic> json) =>Product(
+//     id: json['id'],
+//     harga: json['harga'],
+//     nama: json['nama'].toString(),
+//     kategori: json['kategori'].toString(),
+//     deskripsi: json['deskripsi'].toString(),
+//     gambar: json['gambar'].toString(),
+//   );
+// }
+
+class Product {
+    Product({
+        this.id,
+        this.nama,
+        this.idKategori,
+        this.deskripsi,
+        this.harga,
+        this.stok,
+        this.gambar,
+        this.createdAt,
+        this.updatedAt,
+        this.kategori,
+    });
+
+    int id;
+    String nama;
+    int idKategori;
+    String deskripsi;
+    int harga;
+    int stok;
+    String gambar;
+    DateTime createdAt;
+    dynamic updatedAt;
+    String kategori;
+
+    factory Product.fromJson(Map<String, dynamic> json) => Product(
+        id: json["id"],
+        nama: json["nama"].toString(),
+        idKategori: json["id_kategori"],
+        deskripsi: json["deskripsi"].toString(),
+        harga: json["harga"],
+        stok: json["stok"],
+        gambar: json["gambar"].toString(),
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: json["updated_at"],
+        kategori: json["kategori"].toString(),
+    );
+
+    Map<String, dynamic> toJson() => {
+        "id": id,
+        "nama": nama,
+        "id_kategori": idKategori,
+        "deskripsi": deskripsi,
+        "harga": harga,
+        "stok": stok,
+        "gambar": gambar,
+        "created_at": createdAt.toIso8601String(),
+        "updated_at": updatedAt,
+        "kategori": kategori,
+    };
 }
-
-// List<Product> products = [
-//   Product(
-//     id: 1,
-//     harga: 2000000,
-//     nama: "Nike Air Jordan Low",
-//     brand: "Nike",
-//     deskripsi: "Inspired by the original that debuted in 1985.",
-//     gambar: "asset/product/nike1.png",
-//   ),
-//   Product(
-//     id: 2,
-//     harga: 4500000,
-//     nama: "Yeezy Boost 350 V2 ",
-//     brand: "Adidas",
-//     deskripsi: "Inspired by the original that debuted in 1985.",
-//     gambar: "asset/product/yeezy1.png",
-//   ),
-//   Product(
-//     id: 3,
-//     harga: 150000,
-//     nama: "Converse Chuck Taylor",
-//     brand: "Converse",
-//     deskripsi: "Inspired by the original.",
-//     gambar: "asset/product/converse1.png",
-//   ),
-// ];
