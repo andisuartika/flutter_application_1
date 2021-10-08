@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Models/Product/product.dart';
-import 'package:flutter_application_1/Service/apiStatic.dart';
+import 'package:flutter_application_1/Service/apiService.dart';
 import 'package:flutter_application_1/UI/detailProduct/detailScreen.dart';
 import 'package:flutter_application_1/UI/home/components/productCard.dart';
 import 'package:flutter_application_1/constants.dart';
@@ -32,12 +32,12 @@ class Body extends StatelessWidget {
                 ),
               ),
               FutureBuilder<List<Product>>(
-                future: ApiStatic.getProduct(),
+                future: APIService.getProduct(),
                 builder: (context, snapshot){
                   if(snapshot.connectionState==ConnectionState.waiting){
                     return Center(child: CircularProgressIndicator());
                   }else{
-                    List<Product> products=snapshot.data;
+                    List<Product>  products=snapshot.data!;
                     return Container(
                       child: ListView.builder(
                         itemCount: products.length,
@@ -71,7 +71,7 @@ class Body extends StatelessWidget {
 
 class SearchBox extends StatelessWidget {
   const SearchBox({
-    Key key,
+    Key ? key,
   }) : super(key: key);
 
   @override
@@ -97,7 +97,7 @@ class SearchBox extends StatelessWidget {
 
 class Heading extends StatelessWidget {
   const Heading({
-    Key key,
+    Key ? key,
   }) : super(key: key);
 
   @override

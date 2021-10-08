@@ -1,31 +1,16 @@
-// class Product{
-//   final int id, harga;
-//   final String nama, kategori, deskripsi, gambar;
-
-//   Product({this.id, this.harga,  this.nama, this.kategori, this.deskripsi, this.gambar});
-
-//   factory Product.fromJson(Map<String, dynamic> json) =>Product(
-//     id: json['id'],
-//     harga: json['harga'],
-//     nama: json['nama'].toString(),
-//     kategori: json['kategori'].toString(),
-//     deskripsi: json['deskripsi'].toString(),
-//     gambar: json['gambar'].toString(),
-//   );
-// }
 
 class Product {
     Product({
-        this.id,
-        this.nama,
-        this.idKategori,
-        this.deskripsi,
-        this.harga,
-        this.stok,
-        this.gambar,
-        this.createdAt,
-        this.updatedAt,
-        this.kategori,
+        required this.id,
+        required this.nama,
+        required this.idKategori,
+        required this.deskripsi,
+        required this.harga,
+        required this.stok,
+        required this.gambar,
+        required this.createdAt,
+        required this.updatedAt,
+        required this.kategori,
     });
 
     int id;

@@ -5,7 +5,7 @@ import 'colorDot.dart';
 
 class ListOfColors extends StatelessWidget {
   const ListOfColors({
-    Key key,
+    Key ? key,
   }) : super(key: key);
 
   @override

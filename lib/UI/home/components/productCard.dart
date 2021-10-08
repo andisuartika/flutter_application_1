@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Models/Product/product.dart';
-import 'package:flutter_application_1/Service/apiStatic.dart';
+import 'package:flutter_application_1/Service/apiService.dart';
 
 import '../../../constants.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({
-    Key key, this.itemIndex, this.product, this.press,
+    Key ? key, 
+    required this.itemIndex, 
+    required this.product, 
+    required this.press,
   }) : super(key: key);
 
   final int itemIndex;
   final Product product;
-  final Function press;
+  final VoidCallback  press;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +47,7 @@ class ProductCard extends StatelessWidget {
                   height: 140,
                   width: 200,
                   child: Image.network(
-                    ApiStatic.host+product.gambar,
+                    APIService.host+product.gambar,
                     fit: BoxFit.cover,
                     ),
                 ),

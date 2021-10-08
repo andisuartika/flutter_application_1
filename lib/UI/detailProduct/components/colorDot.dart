@@ -4,8 +4,8 @@ import '../../../constants.dart';
 
 class ColorDot extends StatelessWidget {
   const ColorDot({
-    Key key, 
-    this.fillColor, 
+    Key? key, 
+    required this.fillColor, 
     this.isSelected = false,
   }) : super(key: key);
 

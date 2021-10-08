@@ -9,8 +9,8 @@ import 'package:flutter_application_1/Models/Product/product.dart';
 class Body extends StatelessWidget {
   final Product product;
   const Body({
-    Key key,
-    this.product,
+    Key ? key,
+    required this.product,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {

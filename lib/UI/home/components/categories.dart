@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../constants.dart';
 
 class CategoryList extends StatefulWidget {
-  const CategoryList({ Key key }) : super(key: key);
+  const CategoryList({ Key ? key }) : super(key: key);
 
   @override
   _CategoryListState createState() => _CategoryListState();
