@@ -12,7 +12,6 @@ class DescriptionProduct extends StatelessWidget {
   }) : super(key: key);
 
   final Size size;
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -28,66 +27,21 @@ class DescriptionProduct extends StatelessWidget {
               fontSize: 24,
             ),
           ),
-          Text(
-            product.kategori,
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w300
-            ),
-          ),
+          SizedBox(height: 10),
           Text(
             product.deskripsi,
             style: TextStyle(
               fontSize: 16,
             ),
           ),
+          SizedBox(height: 20),
           Text(
-            "\Rp.${product.harga}",
+            "\Rp. ${product.harga}",
             style: TextStyle(
               fontWeight: FontWeight.w700,
               fontSize: 24,
             ),
           ),
-          Row(
-            children: [
-              GestureDetector(
-                onTap: (){},
-                child: Container(
-                  margin: EdgeInsetsDirectional.only(top: 15),
-                  width: 45,
-                  height: 45,
-                  decoration: BoxDecoration(
-                    color: kSecondaryColor,
-                    borderRadius: BorderRadius.circular(10)
-                  ),
-                  child: Icon(Icons.shopping_cart_rounded),
-                ),
-              ),
-              Spacer(),
-              GestureDetector(
-                onTap: (){},
-                child: Container(
-                  margin: EdgeInsetsDirectional.only(top: 15),
-                  height: 45,
-                  width: size.width * 0.5,
-                  decoration: BoxDecoration(
-                    color: kPrimaryLightColor,
-                    borderRadius: BorderRadius.circular(10)
-                  ),
-                  child: Center(
-                    child: Text(
-                      "Buy Now",
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold
-                      ),
-                    ),
-                  ),
-                ),
-              )
-            ],
-          )
         ],
       ),
     );

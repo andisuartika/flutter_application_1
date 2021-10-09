@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Models/errormsg.dart';
 import 'package:flutter_application_1/Service/apiService.dart';
+import 'package:flutter_application_1/UI/product/product_screen.dart';
 import 'package:flutter_application_1/Widget/Components/rounded_button.dart';
 import 'package:flutter_application_1/constants.dart';
 import 'package:image_picker/image_picker.dart';
@@ -81,7 +82,9 @@ class _BodyState extends State<Body> {
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
         if (_success) {
           print("success");
-          Navigator.pop(context);
+          Navigator.push(context,MaterialPageRoute(
+              builder: (context) => ProductScreen(),
+          ));
         }
     }
 

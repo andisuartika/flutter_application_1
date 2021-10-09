@@ -6,6 +6,7 @@ import 'package:flutter_application_1/Widget/Components/formError.dart';
 import 'package:flutter_application_1/Widget/Components/rounded_button.dart';
 import 'package:flutter_application_1/constants.dart';
 import 'package:http/http.dart';
+import 'package:iconsax/iconsax.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -185,7 +186,7 @@ class _LoginFormState extends State<LoginForm> {
                 fillColor: Color(0xFFe7edeb),
                 hintText: "Email",
                 prefixIcon: Icon(
-                  Icons.email,
+                  Icons.mail_outline_rounded,
                   color: Colors.grey[600],
                 )
 
@@ -220,7 +221,7 @@ class _LoginFormState extends State<LoginForm> {
                 fillColor: Color(0xFFe7edeb),
                 hintText: "Password",
                 prefixIcon: Icon(
-                  Icons.lock,
+                  Iconsax.lock,
                   color: Colors.grey[600],
                 )
               ),

@@ -31,7 +31,7 @@ class ProductImage extends StatelessWidget {
           ),
           Transform.rotate(angle: -180 / 360,
             child: Image.network(
-              APIService.host+gambar,
+              APIService.hostStorage+gambar,
               height: size.width * 0.8,
               width: size.width * 0.8,
               fit: BoxFit.cover,

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Models/Category/category.dart';
+import 'package:flutter_application_1/Service/apiService.dart';
 
 import '../../../../constants.dart';
 
@@ -11,7 +13,20 @@ class CategoryList extends StatefulWidget {
 
 class _CategoryListState extends State<CategoryList> {
   int selectedIndex = 0;
-  List categories = ['All', 'Nike', 'Adidas', 'Puma', 'Converse', 'Vans'];
+   late List<Category> categories = [] ;
+  @override
+  void getCategory() async {
+    final respose = await APIService.getCategory();  
+    setState(() {
+          categories=respose.toList();
+    });
+  }
+
+  @override
+  void initState() {
+    getCategory();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,7 +52,7 @@ class _CategoryListState extends State<CategoryList> {
               borderRadius: BorderRadius.circular(10)
             ),
             child: Text(
-              categories[index],
+              categories[index].kategori,
               style: TextStyle(color: index == selectedIndex ? Colors.white : Colors.black),
             ),
           ),

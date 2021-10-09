@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/UI/product/addProduct/addProduct_screen.dart';
 import 'package:flutter_application_1/constants.dart';
-class ProductScreen extends StatelessWidget {
 
+import 'components/body.dart';
+class ProductScreen extends StatelessWidget {
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,9 +26,7 @@ class ProductScreen extends StatelessWidget {
           child: Icon(Icons.add, color: Colors.white),
         )
       ),
-      body: Container(
-        child: Center(child: Text('Product')),
-      ),
+      body: Body(),
     );
   }
 }

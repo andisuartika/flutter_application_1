@@ -3,6 +3,7 @@ class Product {
     Product({
         required this.id,
         required this.nama,
+        required this.seller,
         required this.idKategori,
         required this.deskripsi,
         required this.harga,
@@ -15,6 +16,7 @@ class Product {
 
     int id;
     String nama;
+    int seller;
     int idKategori;
     String deskripsi;
     int harga;
@@ -27,6 +29,7 @@ class Product {
     factory Product.fromJson(Map<String, dynamic> json) => Product(
         id: json["id"],
         nama: json["nama"].toString(),
+        seller: json["seller"],
         idKategori: json["id_kategori"],
         deskripsi: json["deskripsi"].toString(),
         harga: json["harga"],
@@ -40,6 +43,7 @@ class Product {
     Map<String, dynamic> toJson() => {
         "id": id,
         "nama": nama,
+        "seller": seller,
         "id_kategori": idKategori,
         "deskripsi": deskripsi,
         "harga": harga,

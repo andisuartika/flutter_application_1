@@ -20,6 +20,7 @@ class _LauncherPageState extends State<LauncherPage> {
   startLaunching() async {
     final prefs = await SharedPreferences.getInstance();
     bool slogin = prefs.getBool('login') ?? false;
+    print(slogin);
 
     var duration = const Duration(seconds: 1);
     return new Timer(duration, () {
