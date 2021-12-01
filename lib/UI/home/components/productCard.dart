@@ -6,15 +6,13 @@ import '../../../constants.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({
-    Key ? key, 
-    required this.itemIndex, 
-    required this.product, 
+    Key? key,
+    required this.product,
     required this.press,
   }) : super(key: key);
 
-  final int itemIndex;
   final Product product;
-  final VoidCallback  press;
+  final VoidCallback press;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +20,7 @@ class ProductCard extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(
         horizontal: kDefaulPadding,
-        vertical: kDefaulPadding /4,
+        vertical: kDefaulPadding / 4,
       ),
       // color: kSecondaryColor,
       height: 160,
@@ -39,7 +37,8 @@ class ProductCard extends StatelessWidget {
           ),
           Positioned(
             left: -20,
-            child: Transform.rotate(angle: -180 / 360 ,
+            child: Transform.rotate(
+              angle: -180 / 360,
               child: Hero(
                 tag: '${product.id}',
                 child: Container(
@@ -47,72 +46,67 @@ class ProductCard extends StatelessWidget {
                   height: 140,
                   width: 200,
                   child: Image.network(
-                    APIService.hostStorage+product.gambar,
+                    APIService.hostStorage + product.gambar,
                     fit: BoxFit.cover,
-                    ),
+                  ),
                 ),
               ),
             ),
           ),
           Positioned(
-            right: 0,
-            child:  SizedBox(
-              height: 136,
-              width: size.width - 200,
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: kDefaulPadding, vertical: kDefaulPadding),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      product.nama,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 16,
-                        )
-                    ),
-                    SizedBox(height: 5),
-                    Text(
-                      product.deskripsi,
-                      style: TextStyle(fontSize: 10),
-                    ),
-                    SizedBox(height: 5),
-                    Row(
-                      children: [
-                        Text(
-                          "\Rp.${product.harga}",
+              right: 0,
+              child: SizedBox(
+                height: 136,
+                width: size.width - 200,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: kDefaulPadding, vertical: kDefaulPadding),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(product.nama,
                           style: TextStyle(
                             fontWeight: FontWeight.w700,
-                            fontSize: 14,
-                          ),
-                        ),
-                        Spacer(),
-                        GestureDetector(
-                          onTap: press,
-                          child: Container(
-                            alignment: Alignment.center,
-                            height: 25,
-                            width: 60,
-                            decoration: BoxDecoration(
-                              color: kPrimaryLightColor,
-                              borderRadius: BorderRadius.circular(5)
+                            fontSize: 16,
+                          )),
+                      SizedBox(height: 5),
+                      Text(
+                        product.deskripsi,
+                        style: TextStyle(fontSize: 10),
+                      ),
+                      SizedBox(height: 5),
+                      Row(
+                        children: [
+                          Text(
+                            "\Rp.${product.harga}",
+                            style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                              fontSize: 14,
                             ),
-                            child: Text(
-                              "Detail",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 10
+                          ),
+                          Spacer(),
+                          GestureDetector(
+                            onTap: press,
+                            child: Container(
+                              alignment: Alignment.center,
+                              height: 25,
+                              width: 60,
+                              decoration: BoxDecoration(
+                                  color: kPrimaryLightColor,
+                                  borderRadius: BorderRadius.circular(5)),
+                              child: Text(
+                                "Detail",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 10),
                               ),
                             ),
-                          ),
-                        )
-                      ],
-                    )
-                  ],
+                          )
+                        ],
+                      )
+                    ],
+                  ),
                 ),
-              ),
-            )
-          )
+              ))
         ],
       ),
     );

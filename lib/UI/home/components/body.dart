@@ -5,6 +5,7 @@ import 'package:flutter_application_1/Service/apiService.dart';
 import 'package:flutter_application_1/UI/detailProduct/detailScreen.dart';
 import 'package:flutter_application_1/UI/home/components/productCard.dart';
 import 'package:flutter_application_1/constants.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class Body extends StatefulWidget {
   @override
@@ -12,11 +13,15 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-  late List products = [];
+  // late List products = [];
   late int idKategori = 0;
   int selectedIndex = 0;
   late List categories = [];
   late TextEditingController search;
+  final PagingController<int, Product> _pagingController =
+      PagingController(firstPageKey: 0);
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  int _pageSize = 1;
 
   Future<void> getCategory() async {
     final response = await APIService.getCategory();
@@ -25,18 +30,37 @@ class _BodyState extends State<Body> {
     });
   }
 
-  Future<void> getProduct() async {
-    final respose = await APIService.getProduct(search.text, idKategori);
-    setState(() {
-      products = respose.toList();
-    });
+  // Future<void> getProduct() async {
+  //   final respose =
+  //       await APIService.getProduct(pageKey, search.text, idKategori);
+  //   setState(() {
+  //     products = respose.toList();
+  //   });
+  // }
+
+  Future<void> _fetchPage(int pageKey, search, idKategori) async {
+    try {
+      final newItems = await APIService.getProduct(pageKey, search, idKategori);
+      final isLastPage = newItems.length < _pageSize;
+      if (isLastPage) {
+        _pagingController.appendLastPage(newItems);
+      } else {
+        final nextPageKey = pageKey + 1;
+        _pagingController.appendPage(newItems, nextPageKey);
+      }
+    } catch (error) {
+      _pagingController.error = error;
+    }
   }
 
   @override
   void initState() {
-    search = TextEditingController();
     getCategory();
-    getProduct();
+    search = TextEditingController();
+    _pagingController.addPageRequestListener((pageKey) {
+      _fetchPage(pageKey, search.text, idKategori);
+    });
+    // getProduct();
     super.initState();
   }
 
@@ -58,9 +82,7 @@ class _BodyState extends State<Body> {
             child: TextField(
               controller: search,
               onChanged: (search) {
-                setState(() {
-                  getProduct();
-                });
+                _pagingController.refresh();
               },
               decoration: InputDecoration(
                   enabledBorder: InputBorder.none,
@@ -83,7 +105,7 @@ class _BodyState extends State<Body> {
                   setState(() {
                     selectedIndex = index;
                     idKategori = categories[index].id;
-                    getProduct();
+                    _pagingController.refresh();
                   });
                 },
                 child: Container(
@@ -122,31 +144,70 @@ class _BodyState extends State<Body> {
                       topRight: Radius.circular(25),
                     )),
               ),
-              FutureBuilder<List<Product>>(
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(child: CircularProgressIndicator());
-                  } else {
-                    return Container(
-                      child: ListView.builder(
-                        itemCount: products.length,
-                        itemBuilder: (context, index) => ProductCard(
-                          itemIndex: index,
-                          product: products[index],
-                          press: () {
+              Container(
+                child: RefreshIndicator(
+                  onRefresh: () => Future.sync(
+                    () => _pagingController.refresh(),
+                  ),
+                  child: PagedListView<int, Product>(
+                    pagingController: _pagingController,
+                    builderDelegate: PagedChildBuilderDelegate<Product>(
+                      itemBuilder: (context, item, index) => Container(
+                        child: InkWell(
+                          onTap: () {
                             Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => DetailScreeen(
+                                  product: item,
+                                ),
+                              ),
+                            );
+                          },
+                          child: ProductCard(
+                            product: item,
+                            press: () {
+                              Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => DetailScreeen(
-                                          product: products[index],
-                                        )));
-                          },
+                                  builder: (context) => DetailScreeen(
+                                    product: item,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
                         ),
                       ),
-                    );
-                  }
-                },
-              )
+                    ),
+                  ),
+                ),
+              ),
+              // FutureBuilder<List<Product>>(
+              //   builder: (context, snapshot) {
+              //     if (snapshot.connectionState == ConnectionState.waiting) {
+              //       return Center(child: CircularProgressIndicator());
+              //     } else {
+              //       return Container(
+              //         child: ListView.builder(
+              //           itemCount: products.length,
+              //           itemBuilder: (context, index) => ProductCard(
+              //             // itemIndex: index,
+              //             product: products[index],
+              //             press: () {
+              //               Navigator.push(
+              //                   context,
+              //                   MaterialPageRoute(
+              //                       builder: (context) => DetailScreeen(
+              //                             product: products[index],
+              //                           )));
+              //             },
+              //           ),
+              //         ),
+              //       );
+              //     }
+              //   },
+              // )
             ],
           ))
         ],

@@ -8,8 +8,8 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class APIService {
-  static final host = 'http://192.168.8.102/APIFlutter/public/';
-  static final hostStorage = 'http://192.168.8.102/APIFlutter/storage/app/';
+  static final host = 'http://192.168.43.85/APIFlutter/public/';
+  static final hostStorage = 'http://192.168.43.85/APIFlutter/storage/app/';
 
   Future<SharedPreferences> preferences = SharedPreferences.getInstance();
   static var _token = "";
@@ -72,13 +72,16 @@ class APIService {
     }
   }
 
-  static Future<List<Product>> getProduct(String search, idKategori) async {
+  static Future<List<Product>> getProduct(
+      int page, String search, idKategori) async {
     getPref();
     try {
       final response = await http.get(
           Uri.parse(host +
-              'api/product?search=' +
-              search +
+              'api/product?page=' +
+              page.toString() +
+              '&search=' +
+              search.toString() +
               '&category=' +
               idKategori.toString()),
           headers: {
@@ -86,7 +89,9 @@ class APIService {
           });
       if (response.statusCode == 200) {
         var json = jsonDecode(response.body);
-        final parsed = json['data_product'].cast<Map<String, dynamic>>();
+        // print(json);
+        final parsed =
+            json['data_product']['data'].cast<Map<String, dynamic>>();
         return parsed.map<Product>((json) => Product.fromJson(json)).toList();
       } else {
         return [];
