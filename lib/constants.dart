@@ -17,11 +17,11 @@ const kDefaultShadow = BoxShadow(
   color: Colors.black12, // Black color with 12% opacity
 );
 
-
 final RegExp emailValidatorRegExp =
     RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
 const String kEmailNullError = "Please Enter Your Email";
+const String kNameNullError = "Please Enter Your Name";
 const String kInvalidEmailError = "Please Enter Valid Email";
 const String kPassNullError = "Please Enter Your Password";
-
-
+const String k2PassNullError = "Please Enter Confirm Password";
+const String kMatchPassError = "Passwords don't match";

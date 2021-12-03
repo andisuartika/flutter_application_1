@@ -8,8 +8,8 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class APIService {
-  static final host = 'http://192.168.43.85/APIFlutter/public/';
-  static final hostStorage = 'http://192.168.43.85/APIFlutter/storage/app/';
+  static final host = 'http://192.168.8.103/APIFlutter/public/';
+  static final hostStorage = 'http://192.168.8.103/APIFlutter/storage/app/';
 
   Future<SharedPreferences> preferences = SharedPreferences.getInstance();
   static var _token = "";
@@ -25,6 +25,33 @@ class APIService {
   static signIn(String email, String password) async {
     try {
       final response = await http.post(Uri.parse(host + 'api/login'), body: {
+        "email": email,
+        "password": password,
+      });
+      if (response.statusCode == 200) {
+        var res = jsonDecode(response.body);
+        //print(res);
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setBool('login', true);
+        prefs.setString('token', res['token']);
+        prefs.setString('name', res['user']['name']);
+        prefs.setString('email', res['user']['email']);
+        prefs.setInt('id_user', res['user']['id']);
+        return ErrorMSG.fromJson(res);
+      } else {
+        return ErrorMSG.fromJson(jsonDecode(response.body));
+      }
+    } catch (e) {
+      ErrorMSG responseRequest =
+          ErrorMSG(success: false, message: 'error caught: $e');
+      return responseRequest;
+    }
+  }
+
+  static signup(String name, String email, String password) async {
+    try {
+      final response = await http.post(Uri.parse(host + 'api/signup'), body: {
+        "name": name,
         "email": email,
         "password": password,
       });

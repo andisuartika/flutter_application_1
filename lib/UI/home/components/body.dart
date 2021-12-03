@@ -55,11 +55,11 @@ class _BodyState extends State<Body> {
 
   @override
   void initState() {
-    getCategory();
     search = TextEditingController();
     _pagingController.addPageRequestListener((pageKey) {
       _fetchPage(pageKey, search.text, idKategori);
     });
+    getCategory();
     // getProduct();
     super.initState();
   }

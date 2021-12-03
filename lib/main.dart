@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/UI/launcher/launcher.dart';
-import 'package:flutter_application_1/UI/login/login_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 
 void main() {
   runApp(MyApp());
